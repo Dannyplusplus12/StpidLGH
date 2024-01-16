@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
+<body>
+
+    <div>
+        <div style="margin: 32px 78px; padding: 32px; background-color: rgba(0, 0, 0, 0.4); border-radius: 16px;">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <!-- <script>
+        // document.addEventListener("scroll", (event) => {
+        //     let scroll = this.scrollY;
+        //     if(scroll < 50) {
+        //         document.getElementById('header').style.backgroundColor = 'red'
+        //     }
+        //     else {
+        //         document.getElementById('header').style.backgroundColor = 'transparent'
+        //     }
+        // });
+
+        function deletePost(postId) {
+            fetch('/delete-note', {
+                method: "POST",
+                body: JSON.stringify({ postId: postId }),
+            }).then((_res) => {
+                window.location.href = "/blog"
+            })
+        }
+    </script> -->
+</body>
+</html>

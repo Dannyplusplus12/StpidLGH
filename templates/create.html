@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
+<body>
+
+    <div>
+        <div style="margin: 32px 78px; padding: 32px; background-color: rgba(0, 0, 0, 0.4); border-radius: 16px;">
+            <div>
+                <h3>Chủ đề (or sthing)</h3>
+                <div>
+                    <button type="button" class="bg">Suzume~~</button>
+                    <button type="button" class="bg">Leo núi cùng Madaline</button>
+                    <button type="button" class="bg">Quẩy cũng Danny</button>
+                    <button type="button" class="bg">Chơi đá</button>
+                </div>
+            </div>
+         
+            <div>
+                <h3>Effect</h3>
+                <div>
+                    <button type="button" class="ef">Phoá hoa giấy</button>
+                    <button type="button" class="ef">bùng bùng bùng</button>
+                    <button type="button" class="ef">lẽ ra phải là lửa nhưng tải nhầm</button>
+                    <button type="button" class="ef">ọc ọc ọc</button>
+                </div>
+            </div>
+         
+            <button type="button" id="create_btn">Tạo</button>
+            
+            <video width="320" height="240" controls autoplay>
+                <source src="{{ url_for('static',filename='video/{}.mp4'.format(video_name) ) }}" type="video/mp4">
+            </video>
+            
+            <a href="{{ url_for('dowload', name=video_name ) }}">Tải</a>
+            
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+    const bg_choices = document.querySelectorAll('.bg')
+    let bg_choice = 0
+
+    for(let index = 0; index < 4; ++index) {
+        bg_choices[index].addEventListener('click', () => {
+            bg_choice = index
+        })
+    }
+
+    const ef_choices = document.querySelectorAll('.ef')
+    let ef_choice = 0
+
+    for(let index = 0; index < 4; ++index) {
+        ef_choices[index].addEventListener('click', () => {
+            ef_choice = index
+        })
+    }
+
+    function create_() {
+        let data = {
+            'bg': bg_choice,
+            'ef': ef_choice
+        }
+        fetch('/create', {
+            method: "POST",
+            "headers": {"Content-Type": "application/json"},
+            "body": JSON.stringify(data),
+        }).then((_res) => {
+            window.location.href = "/create"
+        })
+        
+    }
+    document.getElementById('create_btn').addEventListener('click', create_)
+</script>
+</html>
